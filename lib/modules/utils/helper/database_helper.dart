@@ -73,4 +73,11 @@ class DatabaseHelper {
     int res = await database!.rawUpdate(query, aru);
     return res;
   }
+
+  delete({required int deleteid}) async {
+    await initDB();
+    String query = "DELETE FROM $tablename WHERE $id = ?;";
+    List aru = [deleteid];
+    int res = await database!.rawDelete(query, aru);
+  }
 }

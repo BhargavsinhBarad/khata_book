@@ -100,7 +100,14 @@ class update extends StatelessWidget {
                         border: Border.all(),
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: const Center(child: Text("Date")),
+                      child: const Center(
+                          child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text("Date"),
+                          Icon(Icons.calendar_month),
+                        ],
+                      )),
                     ),
                   ),
                   GestureDetector(
@@ -117,7 +124,15 @@ class update extends StatelessWidget {
                         border: Border.all(),
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: const Center(child: Text("Time")),
+                      child: const Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text("Time"),
+                            Icon(Icons.watch_later_rounded)
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ],
@@ -171,13 +186,23 @@ class update extends StatelessWidget {
                                 border: Border.all(),
                                 borderRadius: BorderRadius.circular(10),
                               ),
-                              child: const Center(child: Text("Date")),
+                              child: const Center(
+                                  child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text("Date"),
+                                  Icon(Icons.calendar_month),
+                                ],
+                              )),
                             ),
                           )
                         : Container(),
                   ],
                 ),
               ),
+              size10,
+              size10,
               Center(
                 child: GestureDetector(
                   onTap: () async {

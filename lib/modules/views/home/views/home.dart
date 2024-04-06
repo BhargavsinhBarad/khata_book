@@ -58,7 +58,7 @@ class home extends StatelessWidget {
                       ),
                       GetBuilder<TotalController>(
                         builder: (ctx) => Text(
-                          "${totalController.sumcredit}",
+                          "${totalController.sumcredit[0]}",
                           style: const TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
@@ -84,7 +84,7 @@ class home extends StatelessWidget {
                       ),
                       GetBuilder<TotalController>(
                         builder: (ctx) => Text(
-                          "${totalController.debit}",
+                          "${totalController.sumcredit[1]}",
                           style: const TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
