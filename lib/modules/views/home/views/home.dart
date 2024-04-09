@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
@@ -19,6 +20,13 @@ class home extends StatelessWidget {
         title: const Text("Home"),
         centerTitle: true,
         actions: [
+          IconButton(
+            onPressed: () {
+              Get.changeTheme(
+                  Get.isDarkMode ? ThemeData.light() : ThemeData.dark());
+            },
+            icon: const Icon(Icons.sunny),
+          ),
           IconButton(
               onPressed: () {
                 Get.to(reminder());
@@ -60,7 +68,9 @@ class home extends StatelessWidget {
                         builder: (ctx) => Text(
                           "${totalController.sumcredit[0]}",
                           style: const TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ],
@@ -103,14 +113,13 @@ class home extends StatelessWidget {
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   const Spacer(),
-                  TextButton(
-                    onPressed: () {
+                  GestureDetector(
+                    onTap: () {
                       Get.to(viewsdata());
                     },
                     child: const Text(
                       "SeeAll",
-                      style: TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],
@@ -120,38 +129,38 @@ class home extends StatelessWidget {
             Expanded(
               child: GetBuilder<TotalController>(
                 builder: (ctx) => FutureBuilder(
-                    future: DatabaseHelper.db.fetchdata(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasError) {
-                        return Text("${snapshot.error}");
-                      } else if (snapshot.hasData) {
-                        totalController.data = snapshot.data;
-                        return ListView.builder(
-                          // reverse: true,
-                          itemCount: totalController.data?.length,
-                          itemBuilder: (context, i) {
-                            return ("${date.day}/${date.month}/${date.year}" ==
-                                    totalController.data?[i].date)
-                                ? Card(
-                                    color: (totalController.data![i].type ==
-                                            "Debit")
-                                        ? Colors.red.withOpacity(0.4)
-                                        : Colors.green.withOpacity(0.4),
-                                    child: ListTile(
-                                      title:
-                                          Text(totalController.data![i].name),
-                                      trailing: Text(
-                                          "${totalController.data![i].amount}"),
-                                      subtitle:
-                                          Text(totalController.data![i].remark),
-                                    ),
-                                  )
-                                : const Card();
-                          },
-                        );
-                      }
-                      return const CircularProgressIndicator();
-                    }),
+                  future: DatabaseHelper.db.fetchdata(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
+                      return Text("${snapshot.error}");
+                    } else if (snapshot.hasData) {
+                      totalController.data = snapshot.data;
+                      return ListView.builder(
+                        // reverse: true,
+                        itemCount: totalController.data?.length,
+                        itemBuilder: (context, i) {
+                          return ("${date.day}/${date.month}/${date.year}" ==
+                                  totalController.data?[i].date)
+                              ? Card(
+                                  color:
+                                      (totalController.data![i].type == "Debit")
+                                          ? Colors.red.withOpacity(0.4)
+                                          : Colors.green.withOpacity(0.4),
+                                  child: ListTile(
+                                    title: Text(totalController.data![i].name),
+                                    trailing:
+                                        Text(totalController.data![i].amount),
+                                    subtitle:
+                                        Text(totalController.data![i].remark),
+                                  ),
+                                )
+                              : const Card();
+                        },
+                      );
+                    }
+                    return const CircularProgressIndicator();
+                  },
+                ),
               ),
             ),
           ],

@@ -1,8 +1,6 @@
 import 'dart:developer';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:khata_book/modules/utils/helper/database_helper.dart';
 import 'package:khata_book/modules/views/add/controller/typecontroller.dart';
